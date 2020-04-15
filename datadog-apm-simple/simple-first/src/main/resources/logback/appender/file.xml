@@ -1,0 +1,13 @@
+<included>
+  <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${logFilePath}_${HOSTNAME}${logFileExtension}</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>${logFilePath}_%d{yyyy-MM-dd}${logFileExtension}</fileNamePattern>
+      <maxHistory>${logFileMaxHistory}</maxHistory>
+    </rollingPolicy>
+    <encoder>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} F %-5p %c{5}.%M - %m - [th:%thread, trace-id:%X{dd.trace_id:-_}, span-id:%X{dd.span_id:-_}]%n</pattern>
+      <charset>UTF-8</charset>
+    </encoder>
+  </appender>
+</included>

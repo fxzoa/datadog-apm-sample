@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: simple-api
+  name: simple-first
+spec:
+  selector:
+    matchLabels:
+      app: simple-first
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: simple-first
+    spec:
+      containers:
+      - name: simple-first
+        image: fxzoa/datadog-apm-simple-first
+        ports:
+        - containerPort: 8080
+        imagePullPolicy: Always
+        env:
+        - name: DD_AGENT_HOST 
+          valueFrom: 
+            fieldRef: 
+              fieldPath: status.hostIP 
+        - name: TZ
+          value: Asia/Tokyo
+        - name: SPRING_PROFILES_ACTIVE
+          value: "local"
+        - name: K8S_NAMESPACE
+          value: "simple-api"
+        - name: SECOND_SERVICE_NAME
+          value: "simple-second"
+        - name: SECOND_SERVICE_PORT
+          value: "8082"
+        volumeMounts:
+          - name: app-logs
+            mountPath: /var/lib/docker
+      volumes:
+        - name: app-logs
+          hostPath:
+            path: /var/log/app/cdx-auth-api/
+            type: DirectoryOrCreate
