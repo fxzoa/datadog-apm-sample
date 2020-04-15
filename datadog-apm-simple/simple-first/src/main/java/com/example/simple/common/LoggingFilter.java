@@ -24,16 +24,19 @@ public class LoggingFilter implements Filter {
 	    @Override
 	    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 	    	writeHttpHeaders((HttpServletRequest) request);
+	    	chain.doFilter(request, response);
 	    }
 	    
 	    private void writeHttpHeaders(HttpServletRequest request) {
-	    	System.out.println("### LoggingFilter HTTP Headers [BEGIN] ### ");
+	    	System.out.println(" ");
+	    	System.out.println("# LoggingFilter HTTP Headers [BEGIN] #");
 	  	  	Enumeration headerNames = request.getHeaderNames();
 	  	  	while	(headerNames.hasMoreElements()) {
 	  	  		String key = (String) headerNames.nextElement();
-	  	  		System.out.println("### " + key + " = " + request.getHeader(key));
+	  	  		System.out.println("# " + key + " = " + request.getHeader(key));
 	  	  	}
-	  	  	System.out.println("### LoggingFilter HTTP Headers [END] ### ");
+	  	  	System.out.println("# LoggingFilter HTTP Headers [END] #");
+	  		System.out.println(" ");
 	    }
 	    
 }

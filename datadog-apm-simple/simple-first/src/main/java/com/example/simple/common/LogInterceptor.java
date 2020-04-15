@@ -39,13 +39,13 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
   }
   
   private void writeHttpHeaders(HttpServletRequest request) {
-	  LOGGER.info("### LogInterceptor HTTP Headers [BEGIN] ### ");
+	  LOGGER.info("# LogInterceptor HTTP Headers [BEGIN] #");
 	  Enumeration headerNames = request.getHeaderNames();
 	  while	(headerNames.hasMoreElements()) {
 	    String key = (String) headerNames.nextElement();
-	    LOGGER.info("### {} = {} ", key, request.getHeader(key));
+	    LOGGER.info("# {} = {} ", key, request.getHeader(key));
 	  }
-	  LOGGER.info("### LogInterceptor HTTP Headers [END] ### ");
+	  LOGGER.info("# LogInterceptor HTTP Headers [END] #");
   }
   
 }
