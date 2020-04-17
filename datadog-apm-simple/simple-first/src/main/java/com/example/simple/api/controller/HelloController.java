@@ -22,13 +22,13 @@ public class HelloController {
 
   @Value("${K8S_NAMESPACE:simple-api}")
   String namespace;
-	
+
   @Value("${SECOND_SERVICE_NAME:simple-second}")
   String secondServiceName;
-	
+
   @Value("${SECOND_SERVICE_PORT:8080}")
   String secondServicePort;
-	
+
   @GetMapping("port")
   public String getPort() {
     String returnValue = "URL:";
@@ -40,7 +40,7 @@ public class HelloController {
 
   @GetMapping("hello")
   public String get() {
-    return "hello";
+    return "first service return hello.";
   }
 
   @GetMapping("third-api")
@@ -49,7 +49,7 @@ public class HelloController {
     String apiReturnValue = restTemplate.getForObject(getURL(), String.class);
     return "third API return:".concat(apiReturnValue);
   }
-  
+
   	private String getURL() {
   		return "http://" + secondServiceName + "." + namespace + ":" + secondServicePort + "/api/hello";
   	}

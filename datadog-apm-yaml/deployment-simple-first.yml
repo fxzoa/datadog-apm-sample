@@ -16,9 +16,9 @@ spec:
       containers:
       - name: simple-first
         image: fxzoa/datadog-apm-simple-first
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
-        imagePullPolicy: Always
         env:
         - name: DD_AGENT_HOST 
           valueFrom: 
@@ -36,7 +36,7 @@ spec:
           value: "8082"
         volumeMounts:
           - name: app-logs
-            mountPath: /var/lib/docker
+            mountPath: /app/log/
       volumes:
         - name: app-logs
           hostPath:

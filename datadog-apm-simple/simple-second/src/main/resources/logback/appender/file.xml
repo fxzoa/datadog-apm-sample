@@ -1,8 +1,8 @@
 <included>
   <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>${logFilePath}_${HOSTNAME}${logFileExtension}</file>
+    <file>${logFilePath}${HOSTNAME}${logFileExtension}</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      <fileNamePattern>${logFilePath}_%d{yyyy-MM-dd}${logFileExtension}</fileNamePattern>
+      <fileNamePattern>${logFilePath}${HOSTNAME}_%d{yyyy-MM-dd}${logFileExtension}</fileNamePattern>
       <maxHistory>${logFileMaxHistory}</maxHistory>
     </rollingPolicy>
     <encoder>

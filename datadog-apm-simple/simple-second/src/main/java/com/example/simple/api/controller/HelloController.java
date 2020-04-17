@@ -22,7 +22,6 @@ public class HelloController {
 
   @GetMapping("port")
   public String getPort() {
-
     String returnValue = "URL:";
     returnValue = returnValue.concat(serverConfig.getAddress());
     returnValue = returnValue.concat("/");
@@ -32,7 +31,7 @@ public class HelloController {
 
   @GetMapping("hello")
   public String get() {
-    return "hello";
+    return "second service return hello.";
   }
 
 }
