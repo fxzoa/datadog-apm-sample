@@ -30,16 +30,16 @@ public class RequestLoggingFilter implements Filter {
 	    }
 
 	    private void writeHttpHeaders(HttpServletRequest request) {
-			log.info(" ");
-	    	log.info("# Http Request Path: {} #", request.getPathInfo());
+			log.info("# -----------------------------------------------------#");
+	    	log.info("# Http Request Path: {} #", request.getRequestURI());
 	    	log.info("# Http Request Headers [BEGIN] #");
-	  	  	Enumeration headerNames = request.getHeaderNames();
+	  	  	Enumeration<?> headerNames = request.getHeaderNames();
 	  	  	while	(headerNames.hasMoreElements()) {
 	  	  		String key = (String) headerNames.nextElement();
 	  	  		log.info("# {} = {}", key, request.getHeader(key));
 	  	  	}
 	  	  	log.info("#Http Request Headers [END] #");
-			log.info(" ");
+			log.info("# -----------------------------------------------------#");
 	    }
 
 }
