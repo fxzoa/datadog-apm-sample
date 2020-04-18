@@ -1,7 +1,7 @@
 FROM amazoncorretto:11.0.6
 
 WORKDIR /usr/jar
-COPY /lib/dd-java-agent-0.47.0.jar /usr/jar/dd-java-agent.jar
+COPY /lib/dd-java-agent.jar /usr/jar/dd-java-agent.jar
 COPY /target/first-service-1.0.0.jar /usr/jar/first-service.jar
 
 EXPOSE 8080
