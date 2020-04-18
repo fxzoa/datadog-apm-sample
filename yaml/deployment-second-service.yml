@@ -1,21 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: simple-api
-  name: simple-first
+  name: second-service
 spec:
   selector:
     matchLabels:
-      app: simple-first
+      app: second-service
   replicas: 1
   template:
     metadata:
       labels:
-        app: simple-first
+        app: second-service
     spec:
       containers:
-      - name: simple-first
-        image: fxzoa/datadog-apm-simple-first
+      - name: second-service
+        image: fxzoa/datadog-apm-second-service
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
@@ -28,17 +27,11 @@ spec:
           value: Asia/Tokyo
         - name: SPRING_PROFILES_ACTIVE
           value: "local"
-        - name: K8S_NAMESPACE
-          value: "simple-api"
-        - name: SECOND_SERVICE_NAME
-          value: "simple-second"
-        - name: SECOND_SERVICE_PORT
-          value: "8082"
         volumeMounts:
           - name: app-logs
             mountPath: /app/log/
       volumes:
         - name: app-logs
           hostPath:
-            path: /var/log/app/cdx-auth-api/
+            path: /var/log/app/second-service/
             type: DirectoryOrCreate

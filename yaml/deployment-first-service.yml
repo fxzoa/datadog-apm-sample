@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: first-service
+spec:
+  selector:
+    matchLabels:
+      app: first-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: first-service
+    spec:
+      containers:
+      - name: first-service
+        image: fxzoa/datadog-apm-first-service
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+        env:
+        - name: MY_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: MY_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: MY_POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: MY_POD_SERVICE_ACCOUNT
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.serviceAccountName
+        - name: K8S_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: SECOND_SERVICE_NAME
+          value: "second-service"
+        - name: SECOND_SERVICE_PORT
+          value: "8082"
+        - name: DD_AGENT_HOST
+          valueFrom: 
+            fieldRef: 
+              fieldPath: status.hostIP
+        - name: TZ
+          value: Asia/Tokyo
+        - name: SPRING_PROFILES_ACTIVE
+          value: "local"
+        volumeMounts:
+          - name: app-logs
+            mountPath: /app/log/
+      volumes:
+        - name: app-logs
+          hostPath:
+            path: /var/log/app/first-service/
+            type: DirectoryOrCreate
