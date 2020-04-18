@@ -30,8 +30,13 @@ public class HelloController {
   }
 
   @GetMapping("hello")
-  public String get() {
-    return "second service return hello.";
+  public String getHello() {
+    return "second service /hello called.";
+  }
+
+  @GetMapping("second")
+  public String getSecond() {
+      return "[ second service /second called. ]";
   }
 
 }

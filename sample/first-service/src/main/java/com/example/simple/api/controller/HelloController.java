@@ -39,18 +39,18 @@ public class HelloController {
   }
 
   @GetMapping("hello")
-  public String get() {
-    return "first service return hello.";
+  public String getHelllo() {
+    return "first service /hello called.";
   }
 
-  @GetMapping("third-api")
-  public String getThirdApi() {
+  @GetMapping("first")
+  public String getFirstApi() {
     RestTemplate restTemplate = new RestTemplate();
     String apiReturnValue = restTemplate.getForObject(getURL(), String.class);
-    return "third API return:".concat(apiReturnValue);
+    return "first sevice called. invoke /second Api. return: ".concat(apiReturnValue);
   }
 
   	private String getURL() {
-  		return "http://" + secondServiceName + "." + namespace + ":" + secondServicePort + "/api/hello";
+  		return "http://" + secondServiceName + "." + namespace + ":" + secondServicePort + "/api/second";
   	}
 }
