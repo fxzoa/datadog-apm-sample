@@ -41,3 +41,9 @@ GET http://localhost:31640/api/first
 ###
 
 GET http://localhost:31640/api/hello
+###
+
+GET http://localhost:31640/api/port
+
+###
+GET http://localhost:31640/actuator/health/
